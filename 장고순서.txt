@@ -1,0 +1,76 @@
+Django의 공식적인 설계 패턴은 무엇인가요?  MVT 
+Model 이란: 데이터베이스 (= 데이터베이스안의 테이블) 
+View 는 : 처리로직 
+Templates 는:  화면  
+
+Django 프로젝트 내의 설정을 담당하는 파일은?  settings.py
+
+프로젝트 내의 URL 경로를 매핑하는, 라우팅을 담당하는 routing  파일은? urls.py
+
+django-admin startproject [프로젝트명]  : 프로젝트 만들 때
+
+
+python manage.py makemigrations
+python manage.py migrate  
+이 두가지는 각각 무슨 역할?
+ 
+python manage.py startapp [앱이름]      : 앱 만들 때
+
+개발용 서버를 실행하는 명령어는?
+python manage.py runserver
+
+python manage.py runserver 8001    
+
+클라이언트의 요청을 받아 응답을 반환하기 위하여 로직을 수행하는 함수나 클래스를 실행하는 과정은?  뷰 View
+
+템플릿에서 변수의 이름이 object일 때, 변수를 표현하는 템플릿 태그는?
+${ object }   
+{{ object }}
+
+for 문을 템플릿에서 돌리고 싶을 때, 파이썬 코드를 둘러싸는 템플릿 태그는?
+   {%  for  object in objects : %}
+    .....
+   {% endfor  %}
+
+
+
+
+
+
+
+
+1. 가상환경 만들기 : python3 -m venv v_django
+2. 가상환경 활성화: source  v_dango/bin/activate
+3. 장고 설치 : pip install django
+#### requirements.txt를 만들어서 한번에 설치 가능
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+
+==========
+4. 프로젝트 만들기: django-admin startproject mysite
+  - mysite를 이름 바꾸기:  mv mysite  ch100
+5. 환경설정: settings.py 수정
+  - 
+6. 회원정보 데이터베이스 만들기:  python3 manage.py migrate
+7. 관리자계정 만들기: python3 manage.py  createsuperuser
+=========
+8. 앱 만들기 :  python3 manage.py startapp  bookmark
+10. 애플리케이션 등록 :  mysite의  settings.py 의 installed_apps: [  .......] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
