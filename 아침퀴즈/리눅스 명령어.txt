@@ -1,0 +1,50 @@
+To disable it please create the
+/home/user/.hushlogin file.
+
+touch  .hushlogin
+vi  .hushlogin
+echo  > .hushlogin
+
+
+
+현재 파일목록을 봅니다.    
+ls 
+ls -al
+la
+ll
+
+
+
+test.txt 파일을 만들어 봅시다.
+- touch, vi, echo 
+
+rm -rf dir1 dir2 dir4 dirname dirname1 test  testdir test.txt
+
+testdir 디렉토리를 만들어 주세요
+
+
+test.txt 를  testdir 아래로 복사해 주세요
+
+(mkdir dirname 으로 디렉토리를 만든 후)
+testdir 을 dirname 아래로 복사해 봅시다.
+
+(test1  디렉토리를 만든 후, test.txt를 안에 복사후)
+test1 을 testdir 로 이동해 주세요.
+
+
+testfile5, testfile6, testfile7, testfile8 을 만들어 주세요
+testfile5, testfile6, testfile7, testfile8 을 testdir 로 이동해 주세요.
+
+testdir 아래의 testfile5을 홈디렉토리로 복사해 주세요.
+
+testfile5을   test1.txt 로 이름을 바꾸어 주세요.
+
+"a"  글자가 들어있는 test.txt 를 만들어 봅시다.
+"b"  글자가 들어있는 test1.txt 를 만들어 봅시다.
+
+test.txt 에 들어있는 모든 내용과 test1.txt 에 들어있는 모든 내용을 포함하는 test2.txt를 만들어 주세요.
+
+
+pip list 중에서 py라는 글자가 들어있는 것만 필터링해 봅시다.
+
+

@@ -73,15 +73,365 @@ MAE , MSE , Accuracy
 callback
 
 
+이미지를 처리할 때, DNN 방식보다 가중치를 훨씬 적게 쓰면서도 더 성능이 좋은 것은?
+
+
+딥러닝에서 학습이란?     여러 번 반복하면서  경사하강법을 통하여  손실함수가 최소값을 갖도록  가중치 ( 파라미터) 를 업데이트 하는 것
+
+
+파라미터란   매개변수 parameter    =    가중치  weight 
+하이퍼 파라미터 hyper parameter   <- 옵션 조절
+model.compile( optimizer='adam', loss = 'crossentropy',..)
+model.fit(X_train, y_train, epochs= 30)   
+obj.plus(10, 20)
+
+
+
+모델을 저장하는 데는 두가지 방법이 있다. 
+- 모델 구조 와 가중치를 한꺼번에 저장  model.save( )
+- 가중치만 저장
+
+
+빈칸에 들어갈 코드는?
+loaded_model = keras.models._______('my_model.keras')
+
+
+
+CNN 레이어를 거친 3차원을 1차원 배열로 평탄화할 때 쓰이는 것은?
+model.add(MaxPooling2D(2))
+model.add(keras.layers._______(  ))
+model.add(Dense(units=100, activation='relu'))
+
+
+
+Dropout 이란?   과적합을 막기 위하여 유닛을 무작위로 제외시키는 것 
+
+
+컬러사진의 피쳐맵이 4개가 나오게 하려면? 
+필터가 4개이면 된다.
+
+4개의 필터 중 첫번째 필터의 형태 shape은?    3X3 ,  3X3X3
+
+
+
+
+## 데이터 준비
+ -  다운받기,  내가 직접 모으기
+ -  다듬기( 정제, 전처리 )
+ -  정규화  255.0 
+ - train, val, test
+
+## 모델만들기
+Conv , pool,  FC 연결
+
+## 학습하기 (검증 세트 가능)
+compile( )
+fit(...., callback, validation_data=( , ) )
+
+## 평가하기 (예측, accuracy)
+pred == y_true, 
+evaluate
+
+## 성능 개선
+1. 용량 늘이기
+2. 데이터량 늘이기 augmentation (증강)
+   -  회전, 반전 flip , crop, 확대, 축소..
+3. Dropout , 규제, ....., batch-normalization , Early Stopping
+
+
+
+
+
+다중 분류 문제에서 모델의 출력값을 0과 1 사이의 확률값으로 변환하고 모든 클래스에 대한 출력값의 합이 1이 되도록 만드는 활성화 함수는 무엇인가?   Softmax 
+
+
+기울기 소실 현상이 무엇이고 어떤 경우에 발생하는지 설명해라
+
+### 기울기 소실(Vanishing Gradient) 현상은 인공신경망을 학습시킬 때 역전파(Backpropagation) 과정에서 입력층(Input Layer)으로 갈수록 기울기(Gradient)가 점차 작아져 0에 수렴하는 현상을 말합니다.
+기울기가 사라지면 가중치(Weight)가 더 이상 업데이트되지 않아, 앞쪽 레이어들이 학습을 제대로 수행하지 못하게 됩니다
+
+
+### 이미지 데이터를 인공지능에게 주기 전에 모든 숫자를 255.0으로 나누는 작업(/ 255.0)을 했습니다. 이유는 무엇일까요?
+
+이미지 데이터를 모델에 입력하기 전에 모든 픽셀 값을 255.0으로 나누는 작업을 데이터 정규화(Normalization)라고 합니다.
+
+- 스케일 통일(최소 최대 정규화)
+- 학습을 안정적으로 하기 위해 ( 기울기 폭주/소실 위험이 줄어듦)
+- 연산 속도와 정확도를 높이기 위해
+
+
+특징을 찾은 Conv2D 뒤에 쓰이는 MaxPooling이란  어떻게 하는건가?
+
+
+
+인공지능에서(  )는 이미지의 공간적 정보(가로,세로,채널)을 훑어내기 위해 정의된 작은 크기의 정방형 행렬입니다.
+( ) 안에 알맞은 말은?
+
+
+3번문제. . 
+첫번째 컨벌루션 연산 결과 (1,1) 칸:  6 9 10 2 16 4   :  47
+두번째 컨벌루션 연산 결과 (1,2) 칸: 0 2 0 0 0 4 1 0  1     : 8
+
+6 9 10 2 16 4         15 12 20   47
+0 2 0 0 0 4 1 0  1                8
 
 
 
 
 
 
+corpus  :  말뭉치, 코퍼스
+
+안녕하세요. 좋은 아침이에요.
+
+1, 2,3, 5, 4,2,3   -> 토큰  7개  1: 안녕, 2 : 하세  <-  어휘 사전
+  
+tokenizing  토크나이징, 토큰화
+toenizer   토크나이저
 
 
 
+train_dataset = image_dataset_from_directory(
+    train_dir,
+    image_size=(180, 180),
+    batch_size=16)
+
+image_size=(180,180)의 의미는 무엇인가?
+
+batch_size=16 의 의미는 무엇인가?
+한 배치크기가 16인 상태에서 가중치 업데이트는 몇 번 이루어지는가?
+
+
+
+x = layers.Conv2D(64, (3,3), activation='relu')(x)
+x = layers.MaxPooling2D((2,2))(x)
+x = layers.Flatten()(x)
+x = layers.Dense(256, activation='relu')(x)
+outputs = layers.Dense(1, activation='sigmoid')(x)
+
+
+MaxPooling2D의 역할은?  연산량 감소, 특징 유지
+Flatten의 역할은? 
+
+문제1 다음 중 이미지 데이터 전처리 과정에서 img_array = img_array / 255.0을 수행하는 이유는?
+
+① 이미지 크기를 줄이기 위해
+② 픽셀 값을 0~1 범위로 정규화하기 위해
+③ 클래스 수를 증가시키기 위해
+④ 채널 수를 변경하기 위해
+
+
+문제2 다음 중 CNN에서 특징(feature)을 추출하는 층은?
+① Dense층
+② Conv2D층
+③ Flatten층
+④ Softmax층
+
+증강을 영어로는?  Augmentation 
+
+문제3   epochs=10의 의미는?
+① 데이터 개수
+② 뉴런 개수
+③ 전체 데이터를 10번 반복 학습
+④ 배치 크기
+
+
+imdb 데이터셋에서
+num_words=500은 무엇인가?
+
+PyTorch 에서 
+optimizer.zero_grad( ) 는 왜 사용하는가?  
+
+grad :  gradient : 기울기
+
+
+RNN처럼 단어를 순서대로 하나씩 처리하지 않고, 문장 전체를 한 번에 보고 단어들 사이의 관계를 계산하는 딥러닝 모델구조는 무엇인가?
+
+트랜스포머에서 가장 핵심이 되는 개념은 무엇인가?
+1.CNN
+2.Self-Attention
+3.MaxPooling
+4.Dropout
+
+Self-Attention의 역할로 알맞은 것은?
+1. 이미지 줄이기.
+2. 단어들 사이의 관계를 파악.
+3. 데이터를 랜덤하게 섞는다.
+4. 오차계산.
+
+
+ 학습 데이터와 검증 데이터를 나누는 이유를 설명하시오.
+
+model.fit(optimizer='rmsprop', epochs=100, validation_data=(X_val, y_val), callbacks=[ Earlystopping, ModelCheckpoint]) 
+
+학습을 하면서 동시에 (도중에) 성능을 테스트하기 위해서.  validation set을 이용하여 loss 를 계산하기 위해.
+
+
+하이퍼 파라미터 hyper parameter 는 파라미터 parameter 와 어떻게 다른가? 
+
+가중치를 파라미터라고 부르기 때문에, 기존의 함수에서 파라미터를 하이퍼파라미터라고 붙였다.
+
+
+학습률(Learning Rate)이 너무 크면 어떤 문제가 발생하는지 설명하시오.
+
+
+
+트랜스포머에서 가장 핵심이 되는 개념은 무엇인가?
+
+1.CNN
+2.Self-Attention
+3.MaxPooling
+4.Dropout
+
+
+Self-Attention의 역할로 알맞은 것은?
+
+1. 이미지 줄이기.
+2. 단어들 사이의 관계를 파악.
+3. 데이터를 랜덤하게 섞는다.
+4. 오차계산.
+
+
+RNN처럼 단어를 순서대로 하나씩 처리하지 않고, 문장 전체를 한 번에 보고 단어들 사이의 관계를 계산하는 딥러닝 구조는 무엇인가?
+
+
+ 트랜스포머 모델에서 입력 임베딩에 '위치 인코딩(Positional Encoding)'을 더해주는 이유는 무엇인가요?
+① 단어를 연속적인 벡터 공간으로 변환하기 위해
+② 입력 텍스트에 포함된 문법적 오류를 수정하기 위해
+③ 시퀀스 내에서 단어들의 순서나 위치 정보를 모델에 제공하기 위해
+④ 입력 데이터의 전체적인 크기를 압축하기 위해
+
+
+트랜스포머가 특정 단어를 처리할 때, 문장 내 다른 단어들과의 연관성이나 중요도를 계산하기 위해 사용하는 메커니즘은 무엇인가요?
+① 합성곱 신경망 (CNN)
+② 순환 레이어 (Recurrent Layers)
+③ 셀프 어텐션 (Self-Attention)
+④ 드롭아웃 (Dropout)
+
+
+셀프 어텐션 메커니즘에서 입력 벡터는 세 가지 고유한 벡터로 투영됩니다. 
+이 세 가지 벡터의 명칭은 무엇인가요?
+① 입력(Inputs), 출력(Outputs), 은닉 상태(Hidden States)
+② 인코더(Encoders), 디코더(Decoders), 임베딩(Embeddings)
+③ 쿼리(Query), 키(Key), 밸류(Value)
+④ 노드(Nodes), 가중치(Weights), 편향(Biases)
+
+
+ 트랜스포머 아키텍처가 세상에 처음 소개된, 대단히 영향력 있었던 2017년 논문의 제목은 무엇인가요?
+① Deep Learning for Everyone
+② Sequence to Sequence Learning with Neural Networks
+③ Attention Is All You Need
+④ The AI Revolution
+
+
+#문제1 트랜스포머 기반 문장 생성 모델에서 다음 단어를 예측할 때,
+	확률이 가장 높은 상위 K개의 단어만 후보로 남기고
+ 나머지는 배제하여 다양성을 조절하는 디코딩 샘플링 기법은?
+top-K,  top-p
+
+Top-K 샘플링과 함께 쓰이며, 모델의 출력 확률 분포를 변형하여 텍스트 생성의 무작위성과 결정론적 성향을 제어하는 하이퍼파라미터는 무엇인가?
+1. Learning Rate
+2. Batch Size
+3. Temperature
+4. Dropout Rate
+
+빈칸 채우기
+st.session_state.messages.append({
+    "role": "______",
+    "content": user_input
+})
+
+role:  'system', 'user', 'assitant', ........, 'developer'
+
+
+이진 분류 문제에서 출력층으로 적절한 것은?  
+① Dense(10, activation='softmax')
+② Dense(1, activation='sigmoid')
+③ Dense(32, activation='relu')
+④ Conv2D(32)
+
+
+다음 중 과적합(Overfitting)을 줄이는 방법이 아닌 것은?
+① Dropout 사용
+② 데이터 증강
+③ Epoch 무한 증가
+④ EarlyStopping 사용
+
+
+과거에 쓰이던 gpt-4-vision-preview 모델은 서비스가 종료되어 사용할 수 없습니다.
+ 현재 이미지 분석에 가장 권장되는 OpenAI의 최신 가성비 멀티모달 모델은 무엇일까요?
+   1. text-davinci-003
+   2. gpt-4o-mini
+   3. tts-1
+   4. gpt-3.5-turbo
+
+
+
+O / X 로 답해주세요.
+코사인 유사도는 문장의 '길이'나 단어의 '빈도수'가 크게 차이 나더라도,
+문장이 담고 있는 내용의 '의미'를 기준으로 유사도를 측정하기 때문에
+자연어 처리(NLP)와 검색 시스템에서 자주 사용됩니다. 
+
+
+OpenAI의 GPT와 같이 현대에 널리 쓰이는 대규모 언어 모델(LLM)들은 주로 원본 트랜스포머 구조의 어느 부분을 기반으로 하나요?
+① 인코더만 사용하는 구조 (Encoder-only)  
+② 디코더만 사용하는 구조 (Decoder-only)
+③ 인코더-디코더 결합 구조 (Encoder-Decoder)
+④ 순환 구조만 사용하는 구조 (Recurrent-only)
+
+
+
+아주 깊은 신경망 구조에서 기울기(Gradient)가 사라지는 '기울기 소실 문제'를 방지하고 잘 흐르도록 트랜스포머 블록 내부에 적용된 기술은 무엇인가요?
+① 위치 인코딩 (Positional Encoding)
+② 소프트맥스 활성화 함수 (Softmax Activation)
+③ 잔차 연결 / 지름길 연결 (Residual / Skip Connections)
+④ 드롭아웃 규제 (Dropout Regularization)
+
+
+
+
+O / X 로 답해주세요.
+코사인 유사도는 문장의 '길이'나 단어의 '빈도수'가 크게 차이 나더라도,
+문장이 담고 있는 내용의 '의미'를 기준으로 유사도를 측정하기 때문에
+자연어 처리(NLP)와 검색 시스템에서 자주 사용됩니다. 
+
+텍스트 문장을 사람의 목소리(오디로)로 합성하는 기술은?  (from) Text to Speech :  TTS
+
+과거에 쓰이던 gpt-4-vision-preview 모델은 서비스가 종료되어 사용할 수 없습니다.
+ 현재 이미지 분석에 가장 권장되는 OpenAI의 최신 가성비 멀티모달 모델은 무엇일까요?
+   1. text-davinci-003
+   2. gpt-4o-mini
+   3. tts-1
+   4. gpt-3.5-turbo
+
+LCEL(Expression Language) 구조로 엮어,
+복잡한 인공지능 파이프라인을 효율적으로 구축할 수 있도록 돕는 대표적인 오픈소스 프레임워크의 이름은 무엇일까요?
+
+LangChain에서 LLM에 질의를 보내고 답을 받을 때 사용하는 함수(메서드)는?
+
+
+
+ 문자데이터를 벡터 데이터베이스에 저장하기 전 반드시 거쳐야 하는 변환 과정을 정의합니다.
+비정형 언어(텍스트)를 컴퓨터가 수학적으로 계산하고 유사도를 비교할 수 있도록 고차원의 숫자 벡터(수치)로
+변환해 주는 과정을 부르는 이름은?   
+답: 임베딩/텍스트임베딩 (Embedding)
+
+
+
+
+빈칸 채우기
+
+retriever = vectordb.as_retriever(  )
+
+#유사한 문서 리스트로 가져오기
+docs = retriever.( invoke )("비트코인이 궁금해")
+
+Faiss,  Chroma 
+
+
+(2, 3, 4, 5)   4x5 3장, 2개 묶음
+(None , 3, 4, 5)
+(2, 4, 5, 3)
 
 
 
