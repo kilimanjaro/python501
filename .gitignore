@@ -1,7 +1,10 @@
 .ipynb_checkpoints/
+MNIST/
+CIFAR/
 # 바이트 코드 및 임시 파일
 __pycache__/
 *$py.class
+
 
 # 패키징 및 빌드 결과물
 *.egg
